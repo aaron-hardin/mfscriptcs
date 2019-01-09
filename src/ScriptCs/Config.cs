@@ -54,7 +54,9 @@ namespace ScriptCs
 
         public string Eval { get; set; }
 
-        public static Config Create(ScriptCsArgs commandArgs)
+		public IConsole Console { get; set; }
+
+		public static Config Create(ScriptCsArgs commandArgs)
         {
             Guard.AgainstNullArgument("commandArgs", commandArgs);
 

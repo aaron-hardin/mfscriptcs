@@ -11,13 +11,21 @@ namespace ScriptCs
             Guard.AgainstNullArgument("commandArgs", config);
             Guard.AgainstNullArgument("scriptArgs", scriptArgs);
 
-            IConsole console = new ScriptConsole();
-            if (!string.IsNullOrWhiteSpace(config.OutputFile))
-            {
-                console = new FileConsole(config.OutputFile, console);
-            }
+            IConsole console;
+			if( config.Console == null )
+			{
+				console = new ScriptConsole();
+				if( !string.IsNullOrWhiteSpace( config.OutputFile ) )
+				{
+					console = new FileConsole( config.OutputFile, console );
+				}
+			}
+			else
+			{
+				console = config.Console;
+			}
 
-            var logProvider = new ColoredConsoleLogProvider(config.LogLevel, console);
+			var logProvider = new ColoredConsoleLogProvider(config.LogLevel, console);
             var initializationServices = new InitializationServices(logProvider);
             initializationServices.GetAppDomainAssemblyResolver().Initialize();
 
