@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<script>
+		var g_dashboard;
+		var scriptRunner;
+		var commandsRun = [];
+		var pastIndex = -1;
+		window.OnNewDashboard = function (dashboard) {
+			g_dashboard = dashboard;
+			addText("Starting object");
+			scriptRunner = MFiles.CreateObjectCLR( "bin\\ScriptCs.Embedded.dll", "ScriptCs.Embedded.ScriptCsLauncher" );
+			addText("Calling launch");
+			// var vault = GetShellUI(dashboard).Vault;// There seems to be an issue with this and popup dashboards
+			var vault = dashboard.CustomData.shellUI.Vault;
+			scriptRunner.Launch(MFiles.ApplicationPath+"\\bin", vault, "hi");
+			addText("Setting up listener");
+			var input = document.getElementById("content");
+			input.addEventListener("keyup", function(event) {
+				switch(event.key) {
+					case "Enter":
+						run();
+						break;
+					case "Up": // IE/Edge specific value
+					case "ArrowUp":
+						if(pastIndex === -1) {
+							pastIndex = commandsRun.length - 1;
+						} else if(pastIndex > 0) {
+							pastIndex--;
+						}
+						input.value = commandsRun[pastIndex];
+						break;
+					case "Down": // IE/Edge specific value
+					case "ArrowDown":
+						if(pastIndex === -1) {
+							return;
+						} else if(pastIndex < (commandsRun.length-1)) {
+							pastIndex++;
+							input.value = commandsRun[pastIndex];
+						} else if(pastIndex === commandsRun.length-1) {
+							pastIndex = -1;
+							input.value = "";
+							return;
+						} else {
+							return;
+						}
+						break;
+				}
+			});
+			setInterval(function() {
+				addText(scriptRunner.GetMessages());
+			}, 500);
+		}
+		function run() {
+			var input = document.getElementById("content");
+			var inputValue = input.value;
+			commandsRun.push(inputValue);
+			addText(">"+inputValue+String.fromCharCode(13, 10));
+			scriptRunner.Execute(inputValue);
+			input.value = "";
+			pastIndex = -1;
+		}
+		function addText(message) {
+			document.getElementById("console").value += message;
+		}
+		function GetShellUI( dashboard )
+		{
+			if( dashboard == null || dashboard == undefined )
+				return null;
+
+			if( dashboard.Parent == null || dashboard.Parent == undefined )
+				return null;
+
+			if( dashboard.Parent.ShellUI != null && dashboard.Parent.ShellUI != undefined )
+			{
+				return dashboard.Parent.ShellUI;
+			}
+			if( dashboard.Parent.ShellFrame.ShellUI != null && dashboard.Parent.ShellFrame.ShellUI != null )
+			{
+				return dashboard.Parent.ShellFrame.ShellUI;
+			}
+			return null;
+		}
+	</script>
+</head>
+<body>
+	<textarea rows="40" cols="50" id="console"></textarea>
+	<input type="text" id="content" value="" />
+	<button onclick="run()">Run</button>
+</body>
+</html>

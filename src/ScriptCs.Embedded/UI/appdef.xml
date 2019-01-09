@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:noNamespaceSchemaLocation="http://www.m-files.com/schemas/appdef-client-v3.xsd" type="client-application">
+  <guid>3E5AA1DA-3E80-49B8-8907-165F2D3C47D5</guid>
+  <name>ScriptCS</name>
+  <version>0.0.0.9</version>
+  <description>An M-Files application.</description>
+  <publisher>M-Files Inc.</publisher>
+  <copyright>(c) 2018 M-Files Inc.</copyright>
+  <enabled-by-default>true</enabled-by-default>
+  <optional>true</optional>
+  <required-mfiles-version>9.0.0.0</required-mfiles-version>
+  <platforms>
+    <platform>Desktop</platform>
+  </platforms>
+  <modules>
+    <module environment="shellui">
+      <file>Application.js</file>
+    </module>
+  </modules>
+	<dashboards>
+		<dashboard id="ScriptDashboard">
+			<content>ScriptInterface.html</content>
+		</dashboard>
+	</dashboards>
+</application>

@@ -115,3 +115,5 @@ UpgradeLog*.XML
 
 artifacts
 /scriptcs_packages
+.vs/
+node_modules/
