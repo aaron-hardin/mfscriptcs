@@ -30,22 +30,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da" />
+    <Reference Include="Autofac, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.3.3.1\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.MFilesAPI, Version=7.0.0.0, Culture=neutral, PublicKeyToken=f1b4733f444f7ad0, processorArchitecture=MSIL">
-      <HintPath>..\packages\VAF.2.0.380.9\lib\Interop.MFilesAPI.dll</HintPath>
+      <HintPath>..\..\packages\VAF.2.0.380.9\lib\Interop.MFilesAPI.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="MFiles.Crypto, Version=2.0.380.9, Culture=neutral, PublicKeyToken=fa007b370d17fe5e, processorArchitecture=MSIL">
-      <HintPath>..\packages\MFiles.Crypto.2.0.380.9\lib\MFiles.Crypto.dll</HintPath>
+      <HintPath>..\..\packages\MFiles.Crypto.2.0.380.9\lib\MFiles.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="MFiles.VAF, Version=2.0.380.9, Culture=neutral, PublicKeyToken=fa007b370d17fe5e, processorArchitecture=MSIL">
-      <HintPath>..\packages\VAF.2.0.380.9\lib\MFiles.VAF.dll</HintPath>
+      <HintPath>..\..\packages\VAF.2.0.380.9\lib\MFiles.VAF.dll</HintPath>
     </Reference>
     <Reference Include="MFiles.VAF.Configuration, Version=2.0.380.9, Culture=neutral, PublicKeyToken=fa007b370d17fe5e, processorArchitecture=MSIL">
-      <HintPath>..\packages\VAF.2.0.380.9\lib\MFiles.VAF.Configuration.dll</HintPath>
+      <HintPath>..\..\packages\VAF.2.0.380.9\lib\MFiles.VAF.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\VAF.2.0.380.9\lib\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\VAF.2.0.380.9\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -88,7 +90,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="UI\appdef.xml">
       <SubType>Designer</SubType>
