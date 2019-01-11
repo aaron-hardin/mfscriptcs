@@ -17,7 +17,7 @@ namespace ScriptCs.Embedded
 		private readonly IFileSystemMigrator _fileSystemMigrator;
 		private readonly IScriptLibraryComposer _composer;
 
-		public Repl Repl => (Repl) this._repl;
+		public MFilesRepl Repl => (MFilesRepl) this._repl;
 
 		public HtmlExecuteReplCommand( string scriptName, string[] scriptArgs, ScriptServices scriptServices )
 			: this( scriptName,

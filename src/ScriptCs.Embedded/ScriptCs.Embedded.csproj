@@ -60,6 +60,7 @@
     <Compile Include="BufferedConsole.cs" />
     <Compile Include="Extensions\Document.cs" />
     <Compile Include="HtmlExecuteReplCommand.cs" />
+    <Compile Include="MFilesRepl.cs" />
     <Compile Include="MFilesScriptHostFactory.cs" />
     <Compile Include="MFilesScriptHost.cs" />
     <Compile Include="ScriptCsLauncher.cs" />

@@ -27,6 +27,7 @@ namespace ScriptCs.Embedded
 			// TODO: heard this is bad, but don't have another way to do it currently
 			// Need to set the app path because it is used later on to get the bin
 			//AppDomain.CurrentDomain.SetData( "APPBASE", Path.Combine( applicationPath, "bin" ) );
+			// Sets AppDomain.CurrentDomain.BaseDirectory
 			AppDomain.CurrentDomain.SetData( "APPBASE", applicationPath );
 
 			AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
@@ -61,6 +62,7 @@ namespace ScriptCs.Embedded
 				};
 				var myFactory = new MFilesScriptHostFactory( globs, this._console );
 				scriptServicesBuilder.SetOverride<IScriptHostFactory, MFilesScriptHostFactory>( myFactory );
+				scriptServicesBuilder.SetOverride<IRepl, MFilesRepl>();
 				var scriptServices = scriptServicesBuilder.Build();
 
 				var runtimeServices = (RuntimeServices)scriptServicesBuilder.RuntimeServices;
@@ -70,9 +72,7 @@ namespace ScriptCs.Embedded
 				runtimeServices.Container.Resolve<Printers>().AddCustomPrinter<MFSearchBuilder>( search => $"Search for {search.Vault.Name} ({search.Conditions.Count})" );
 
 				this._command = new HtmlExecuteReplCommand( config.ScriptName, scriptArgs, scriptServices );
-				var references = new[] { "Interop.MFilesAPI.dll", "MFiles.VAF.dll", "MFiles.VAF.Configuration.dll" };
-				this._command.Repl.AddReferences( references.Select( reference => Path.Combine( applicationPath, reference ) ).ToArray() );
-				this._command.Repl.ImportNamespaces( "MFiles.VAF.Common", "MFiles.VAF.Configuration", "MFilesAPI", "ScriptCs.Embedded.Extensions" );
+				this._command.Repl.Initialize();
 				this._command.Execute();
 			}
 			catch( Exception e )
